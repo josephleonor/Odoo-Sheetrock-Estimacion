@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Consumption Rule View -->
+    <record id="view_sheetrock_consumption_rule_tree" model="ir.ui.view">
+        <field name="name">sheetrock.consumption.rule.tree</field>
+        <field name="model">sheetrock.consumption.rule</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="faces"/>
+                <field name="structure_gauge"/>
+                <field name="board_thickness"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_sheetrock_consumption_rule_form" model="ir.ui.view">
+        <field name="name">sheetrock.consumption.rule.form</field>
+        <field name="model">sheetrock.consumption.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <title>
+                        <h1><field name="name"/></h1>
+                    </title>
+                    <group>
+                        <group>
+                            <field name="faces"/>
+                            <field name="board_thickness"/>
+                            <field name="structure_gauge"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Materiales por m2">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="quantity"/>
+                                    <field name="component_type"/>
+                                    <field name="is_reinforcement"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <!-- Labor Rate View -->
+    <record id="view_sheetrock_labor_rate_tree" model="ir.ui.view">
+        <field name="name">sheetrock.labor.rate.tree</field>
+        <field name="model">sheetrock.labor.rate</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="base_rate"/>
+                <field name="two_faces_multiplier"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+     <!-- Transport Rule View -->
+    <record id="view_sheetrock_transport_rule_tree" model="ir.ui.view">
+        <field name="name">sheetrock.transport.rule.tree</field>
+        <field name="model">sheetrock.transport.rule</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="min_m2"/>
+                <field name="max_m2"/>
+                <field name="fixed_price"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Actions corrected to use ir.actions.act_window -->
+    <record id="action_sheetrock_consumption_rule" model="ir.actions.act_window">
+        <field name="name">Reglas de Materiales</field>
+        <field name="res_model">sheetrock.consumption.rule</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Definir nueva regla de consumo de materiales
+            </p>
+        </field>
+    </record>
+
+    <record id="action_sheetrock_labor_rate" model="ir.actions.act_window">
+        <field name="name">Tarifas Mano de Obra</field>
+        <field name="res_model">sheetrock.labor.rate</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Definir tarifas de mano de obra
+            </p>
+        </field>
+    </record>
+
+    <record id="action_sheetrock_transport_rule" model="ir.actions.act_window">
+        <field name="name">Tarifas Transporte</field>
+        <field name="res_model">sheetrock.transport.rule</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Definir reglas de costo de transporte
+            </p>
+        </field>
+    </record>
+
+    <!-- Menus -->
+    <menuitem id="menu_sheetrock_config" name="Configuración Sheetrock" parent="sale.menu_sale_config" sequence="50"/>
+    <menuitem id="menu_sheetrock_materials" parent="menu_sheetrock_config" action="action_sheetrock_consumption_rule"/>
+    <menuitem id="menu_sheetrock_labor" parent="menu_sheetrock_config" action="action_sheetrock_labor_rate"/>
+    <menuitem id="menu_sheetrock_transport" parent="menu_sheetrock_config" action="action_sheetrock_transport_rule"/>
+</odoo>

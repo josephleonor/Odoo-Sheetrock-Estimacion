@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="sheetrock_internal_report_template">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Reporte Interno de Costos / Ejecución</h2>
+                    <h4>Referencia: <span t-field="doc.name"/></h4>
+                    
+                    <t t-set="total_mat" t-value="0"/>
+                    <t t-set="total_lab" t-value="0"/>
+                    <t t-set="total_trans" t-value="0"/>
+                    
+                    <t t-foreach="doc.order_line" t-as="line">
+                        <t t-if="line.is_sheetrock_calculation">
+                             <div class="row mt-4 mb-2" style="background-color: #f0f0f0; padding: 10px;">
+                                <div class="col-8">
+                                    <strong><span t-field="line.product_id.name"/></strong>
+                                    <br/>
+                                    <span>Partida: <span t-field="line.name"/></span>
+                                </div>
+                                <div class="col-4 text-end">
+                                    Contratista: <span t-field="line.contractor_id.name"/>
+                                </div>
+                            </div>
+                            
+                            <!-- Detailed Sections -->
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Sección</th>
+                                        <th>Dimensiones</th>
+                                        <th>Caras</th>
+                                        <th>Especificaciones</th>
+                                        <th>Area (m2)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="line.sheetrock_section_ids" t-as="sec">
+                                        <td><span t-field="sec.name"/></td>
+                                        <td><span t-field="sec.length"/> x <span t-field="sec.height"/></td>
+                                        <td><span t-field="sec.faces"/></td>
+                                        <td>
+                                            <span t-field="sec.board_thickness"/>, 
+                                            <span t-field="sec.structure_gauge"/>
+                                            <t t-if="sec.add_reinforcement"> + Refuerzos</t>
+                                        </td>
+                                        <td class="text-end"><span t-field="sec.area"/> m²</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <!-- Costs Summary for this Line -->
+                            <div class="row mt-2">
+                                <div class="col-6 offset-6">
+                                    <table class="table table-sm">
+                                        <tr>
+                                            <td><strong>Costo Estimado Materiales:</strong></td>
+                                            <td class="text-end"><span t-field="line.estimated_material_cost" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Costo Estimado Mano de Obra:</strong></td>
+                                            <td class="text-end"><span t-field="line.estimated_labor_cost" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Costo Estimado Transporte:</strong></td>
+                                            <td class="text-end"><span t-field="line.estimated_transport_cost" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td>
+                                        </tr>
+                                        <tr class="table-active">
+                                            <td><strong>TOTAL INTERNO:</strong></td>
+                                            <td class="text-end"><span t-field="line.estimated_total_cost" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <t t-set="total_mat" t-value="total_mat + line.estimated_material_cost"/>
+                            <t t-set="total_lab" t-value="total_lab + line.estimated_labor_cost"/>
+                            <t t-set="total_trans" t-value="total_trans + line.estimated_transport_cost"/>
+                        </t>
+                    </t>
+                    
+                    <hr/>
+                    <!-- Grand Totals -->
+                     <div class="row mt-4">
+                         <div class="col-12">
+                             <h3>Resumen General del Proyecto</h3>
+                             <table class="table table-bordered">
+                                 <thead>
+                                     <tr>
+                                         <th>Materiales</th>
+                                         <th>Mano de Obra</th>
+                                         <th>Transporte</th>
+                                         <th>Total Costo Estimado</th>
+                                     </tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr>
+                                         <td><span t-esc="total_mat" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td>
+                                         <td><span t-esc="total_lab" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td>
+                                         <td><span t-esc="total_trans" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></td>
+                                         <td><strong><span t-esc="total_mat + total_lab + total_trans" t-options='{"widget": "monetary", "display_currency": doc.currency_id}'/></strong></td>
+                                     </tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                     </div>
+
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</odoo>

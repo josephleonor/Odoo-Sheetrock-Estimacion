@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sheetrock_consumption,sheetrock.consumption.access,model_sheetrock_consumption_rule,sales_team.group_sale_manager,1,1,1,1
+access_sheetrock_consumption_user,sheetrock.consumption.user.access,model_sheetrock_consumption_rule,sales_team.group_sale_salesman,1,0,0,0
+access_sheetrock_consumption_line,sheetrock.consumption.line.access,model_sheetrock_consumption_rule_line,sales_team.group_sale_manager,1,1,1,1
+access_sheetrock_consumption_line_user,sheetrock.consumption.line.user.access,model_sheetrock_consumption_rule_line,sales_team.group_sale_salesman,1,0,0,0
+access_sheetrock_labor,sheetrock.labor.access,model_sheetrock_labor_rate,sales_team.group_sale_manager,1,1,1,1
+access_sheetrock_labor_user,sheetrock.labor.user.access,model_sheetrock_labor_rate,sales_team.group_sale_salesman,1,0,0,0
+access_sheetrock_transport,sheetrock.transport.access,model_sheetrock_transport_rule,sales_team.group_sale_manager,1,1,1,1
+access_sheetrock_transport_user,sheetrock.transport.user.access,model_sheetrock_transport_rule,sales_team.group_sale_salesman,1,0,0,0
+access_sheetrock_section,sheetrock.section.access,model_sheetrock_section,sales_team.group_sale_salesman,1,1,1,1
+access_sheetrock_wizard,sheetrock.wizard.access,model_sheetrock_line_wizard,sales_team.group_sale_salesman,1,1,1,1
+access_sheetrock_wizard_section,sheetrock.wizard.section.access,model_sheetrock_line_wizard_section,sales_team.group_sale_salesman,1,1,1,1

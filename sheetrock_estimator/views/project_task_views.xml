@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_task_form2_inherit_sheetrock" model="ir.ui.view">
+        <field name="name">project.task.form.inherit.sheetrock</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="x_contractor_id"/>
+                <field name="sheetrock_sale_line_id" readonly="1" groups="base.group_no_one"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

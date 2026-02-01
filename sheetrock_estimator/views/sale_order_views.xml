@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_sheetrock_actions" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.sheetrock.actions</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='order_line']/list/field[@name='name']" position="after">
+                <field name="is_sheetrock_calculation" column_invisible="True"/>
+                <button name="action_open_sheetrock_wizard" type="object" 
+                        icon="fa-calculator" title="Calcular Muro"
+                        invisible="not is_sheetrock_calculation"
+                        class="btn-secondary"/>
+                <field name="contractor_id" optional="show" widget="res_partner_many2one" invisible="not is_sheetrock_calculation"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/list/field[@name='price_subtotal']" position="after">
+                 <field name="estimated_total_cost" optional="hide" groups="base.group_user"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

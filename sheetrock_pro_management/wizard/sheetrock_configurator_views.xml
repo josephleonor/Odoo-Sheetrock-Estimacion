@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sheetrock_configurator_form" model="ir.ui.view">
+        <field name="name">sheetrock.configurator.form</field>
+        <field name="model">sheetrock.configurator</field>
+        <field name="arch" type="xml">
+            <form string="Configurador Sheetrock Pro">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <notebook>
+                        <page string="Secciones">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="length"/>
+                                    <field name="height"/>
+                                    <field name="faces"/>
+                                    <field name="finish_level"/>
+                                    <field name="gauge" optional="show"/>
+                                    <field name="separation" optional="show"/>
+                                    <field name="board_id" optional="hide"/>
+                                    
+                                    <field name="area" sum="Total m2"/>
+                                    <field name="qty_planchas" sum="Total Planchas"/>
+                                    <field name="needs_scaffold" widget="boolean_toggle"/>
+                                    <field name="labor_surcharge" widget="percentage"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button string="Generar Estimación" name="action_generate_estimation" type="object" class="btn-primary"/>
+                        <button string="Cancelar" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sheetrock_configurator" model="ir.actions.act_window">
+        <field name="name">Configurador Sheetrock</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">sheetrock.configurator</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_sheetrock_pro_root" name="Sheetrock Pro" sequence="10"/>
+    <menuitem id="menu_sheetrock_configurator" parent="menu_sheetrock_pro_root" action="action_sheetrock_configurator" sequence="10"/>
+</odoo>

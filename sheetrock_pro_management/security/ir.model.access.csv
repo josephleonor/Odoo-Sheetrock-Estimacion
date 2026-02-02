@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sheetrock_section_line,sheetrock.section.line,model_sheetrock_section_line,base.group_user,1,1,1,1
+access_sheetrock_configurator,sheetrock.configurator,model_sheetrock_configurator,base.group_user,1,1,1,1
+access_sheetrock_configurator_line,sheetrock.configurator.line,model_sheetrock_configurator_line,base.group_user,1,1,1,1

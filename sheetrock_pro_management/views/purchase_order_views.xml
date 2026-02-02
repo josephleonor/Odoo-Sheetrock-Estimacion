@@ -22,7 +22,11 @@
             <xpath expr="//field[@name='date_order']" position="after">
                 <field name="task_id" readonly="1" invisible="not task_id"/>
                 <field name="project_id" readonly="1" invisible="not project_id"/>
+                <field name="cost_validated" readonly="1" widget="boolean_toggle"/>
             </xpath>
+            <header position="inside">
+                <button name="action_validate_cost" string="Validar Costo Negociado" type="object" class="btn-success" invisible="cost_validated or state not in ('draft','sent')"/>
+            </header>
         </field>
     </record>
 </odoo>

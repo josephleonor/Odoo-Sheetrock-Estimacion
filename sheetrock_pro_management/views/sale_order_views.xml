@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sheetrock_sale_order_form_inherit_pro" model="ir.ui.view">
+        <field name="name">sale.order.form.sheetrock.pro</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='analytic_account_id']" position="after">
+                <label for="theoretical_margin" string="Análisis de Margen"/>
+                <div class="o_row">
+                    <span class="text-muted">Teórico: </span>
+                    <field name="theoretical_margin" widget="monetary"/>
+                    <span class="pl-3 text-muted"> | Real: </span>
+                    <field name="real_margin" widget="monetary" decoration-danger="real_margin &lt; theoretical_margin" decoration-success="real_margin &gt;= theoretical_margin"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

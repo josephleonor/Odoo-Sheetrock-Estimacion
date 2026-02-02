@@ -52,4 +52,13 @@ class PurchaseOrder(models.Model):
         a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
         c = 2 * asin(sqrt(a)) 
         r = 6371 # Radius of earth in kilometers
-        return c * r
+    # Engineering Validation
+    cost_validated = fields.Boolean(string="Costo Validado por Ingeniería", default=False, tracking=True)
+
+    def action_validate_cost(self):
+        for po in self:
+            po.cost_validated = True
+            # Optional: Lock the order (done) or specific fields
+            if po.state not in ['purchase', 'done']:
+                pass # Can add logic to auto-confirm or just flag
+        return True

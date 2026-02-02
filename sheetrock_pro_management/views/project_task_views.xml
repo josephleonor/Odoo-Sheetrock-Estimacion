@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sheetrock_project_task_form_inherit" model="ir.ui.view">
+        <field name="name">project.task.form.sheetrock</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <!-- Allows Supervisor to create RFQ directly -->
+                <button name="action_create_rfq" string="Crear Solicitud Compra" type="object" class="btn-primary" groups="project.group_project_user"/>
+            </header>
+            <notebook position="inside">
+                <page string="Compras Asignadas" invisible="not purchase_ids">
+                    <field name="purchase_ids" readonly="1"/>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

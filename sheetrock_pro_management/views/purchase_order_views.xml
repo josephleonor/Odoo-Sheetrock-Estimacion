@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sheetrock_purchase_order_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.tree.sheetrock</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="logistics_score" avg="Promedio Logístico" decoration-success="logistics_score &gt; 80"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="sheetrock_purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.sheetrock</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="logistics_score" widget="progressbar" decoration-success="logistics_score &gt; 80"/>
+            </xpath>
+            <xpath expr="//field[@name='date_order']" position="after">
+                <field name="task_id" readonly="1" invisible="not task_id"/>
+                <field name="project_id" readonly="1" invisible="not project_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

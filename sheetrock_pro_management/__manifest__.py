@@ -9,10 +9,12 @@
         y gestión de niveles de acabado.
     """,
     'author': 'Antigravity',
-    'depends': ['base', 'product'],
+    'depends': ['base', 'product', 'purchase', 'project', 'base_geolocalize'],
     'data': [
         'security/ir.model.access.csv',
         'wizard/sheetrock_configurator_views.xml',
+        'views/purchase_order_views.xml',
+        'views/project_task_views.xml',
     ],
     'installable': True,
     'application': True,

@@ -1,14 +1,16 @@
 {
     'name': 'Sistema de Cotización Técnica Muro Sheetrock',
-    'version': '18.0.2.0.0',
+    'version': '18.0.3.0.0',
     'category': 'Construction/Sales',
-    'summary': 'Cotización técnica y ejecución de muros de Sheetrock',
+    'summary': 'Levantamiento, elevación 2D y cotización técnica de muros Sheetrock',
     'description': """
-        Sistema técnico-profesional para cotizar muros Sheetrock como servicio.
-        
+        Sistema técnico-profesional para levantar y cotizar muros Sheetrock como servicio.
+
         Características:
-        - Wizard de captura técnica por línea de venta.
-        - Modelo de secciones con dimensiones (Largo, Alto, Caras, etc).
+        - Captura técnica por muro.
+        - Puertas y ventanas con posición y dimensiones.
+        - Área bruta, área de aberturas, área neta y desperdicio configurable.
+        - Elevación 2D automática de cada muro.
         - Matriz configurable de consumo de materiales por m2.
         - Tarifario de mano de obra.
         - Generación automática de Presupuesto Interno (Materiales + MO + Transporte).

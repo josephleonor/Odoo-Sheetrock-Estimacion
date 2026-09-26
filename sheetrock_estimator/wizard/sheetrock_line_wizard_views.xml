@@ -4,30 +4,81 @@
         <field name="name">sheetrock.line.wizard.form</field>
         <field name="model">sheetrock.line.wizard</field>
         <field name="arch" type="xml">
-            <form string="Calculadora Técnica Sheetrock">
+            <form string="Levantamiento de Muros Sheetrock">
                 <sheet>
                     <group>
                         <group>
                             <field name="product_id"/>
                             <field name="sale_line_id" invisible="1"/>
                         </group>
-                        <group string="Valores por defecto (Nuevas secciones)">
+                        <group string="Valores por defecto">
                             <field name="default_faces"/>
+                            <field name="default_thickness"/>
                             <field name="default_gauge"/>
                         </group>
                     </group>
                     <notebook>
-                        <page string="Secciones de Muro">
-                            <field name="section_ids">
+                        <page string="Muros">
+                            <field name="section_ids" context="{'default_faces': default_faces, 'default_board_thickness': default_thickness, 'default_structure_gauge': default_gauge}">
                                 <list editable="bottom">
                                     <field name="name"/>
                                     <field name="length"/>
                                     <field name="height"/>
                                     <field name="faces"/>
-                                    <field name="structure_gauge"/>
+                                    <field name="layers" optional="hide"/>
+                                    <field name="openings_area" string="Aberturas m²" readonly="1"/>
+                                    <field name="area" string="Neto m²" readonly="1"/>
+                                    <field name="structure_gauge" optional="hide"/>
                                     <field name="board_thickness" optional="hide"/>
-                                    <field name="add_reinforcement" widget="boolean_toggle"/>
+                                    <field name="waste_percent" optional="hide"/>
+                                    <field name="add_reinforcement" widget="boolean_toggle" optional="hide"/>
                                 </list>
+                                <form string="Muro Sheetrock">
+                                    <sheet>
+                                        <group>
+                                            <group string="Geometría">
+                                                <field name="name"/>
+                                                <field name="length"/>
+                                                <field name="height"/>
+                                                <field name="faces"/>
+                                                <field name="layers"/>
+                                                <field name="waste_percent"/>
+                                            </group>
+                                            <group string="Sistema">
+                                                <field name="structure_type"/>
+                                                <field name="stud_spacing"/>
+                                                <field name="structure_gauge"/>
+                                                <field name="board_thickness"/>
+                                                <field name="add_reinforcement"/>
+                                            </group>
+                                        </group>
+                                        <group string="Áreas">
+                                            <field name="gross_area" readonly="1"/>
+                                            <field name="openings_area" readonly="1"/>
+                                            <field name="net_area" readonly="1"/>
+                                            <field name="area" readonly="1"/>
+                                            <field name="area_with_waste" readonly="1"/>
+                                        </group>
+                                        <notebook>
+                                            <page string="Puertas y Ventanas">
+                                                <field name="opening_ids">
+                                                    <list editable="bottom">
+                                                        <field name="name"/>
+                                                        <field name="opening_type"/>
+                                                        <field name="width"/>
+                                                        <field name="height"/>
+                                                        <field name="x_position"/>
+                                                        <field name="sill_height"/>
+                                                        <field name="area" readonly="1"/>
+                                                    </list>
+                                                </field>
+                                            </page>
+                                            <page string="Elevación 2D">
+                                                <field name="elevation_html" widget="html" readonly="1" nolabel="1"/>
+                                            </page>
+                                        </notebook>
+                                    </sheet>
+                                </form>
                             </field>
                         </page>
                     </notebook>

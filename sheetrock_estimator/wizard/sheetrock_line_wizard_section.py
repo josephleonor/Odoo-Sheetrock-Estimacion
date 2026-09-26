@@ -77,6 +77,11 @@ class SheetrockLineWizardSection(models.TransientModel):
                 raise ValidationError(_('El desperdicio no puede ser negativo.'))
             if rec.stud_spacing <= 0:
                 raise ValidationError(_('La separación de parales debe ser mayor que cero.'))
+            for opening in rec.opening_ids:
+                if opening.x_position + opening.width > rec.length + 1e-6:
+                    raise ValidationError(_('La abertura "%s" excede el largo del muro.') % opening.name)
+                if opening.sill_height + opening.height > rec.height + 1e-6:
+                    raise ValidationError(_('La abertura "%s" excede la altura del muro.') % opening.name)
 
     @api.depends(
         'name', 'length', 'height',

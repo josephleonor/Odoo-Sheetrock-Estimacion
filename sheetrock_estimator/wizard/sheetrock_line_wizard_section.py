@@ -1,4 +1,4 @@
-from markupsafe import Markup
+from markupsafe import Markup, escape
 
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
@@ -101,9 +101,11 @@ class SheetrockLineWizardSection(models.TransientModel):
         x0 = margin_x
         y0 = margin_y + (draw_h - wall_h)
 
+        wall_name = escape(self.name or 'Muro')
+
         parts = [
             f'<svg viewBox="0 0 {canvas_w:.0f} {canvas_h:.0f}" style="width:100%;max-width:950px;border:1px solid #d8dadd;background:#fff">',
-            f'<text x="{margin_x:.1f}" y="28" font-size="18" font-weight="600">{self.name or "Muro"}</text>',
+            f'<text x="{margin_x:.1f}" y="28" font-size="18" font-weight="600">{wall_name}</text>',
             f'<rect x="{x0:.1f}" y="{y0:.1f}" width="{wall_w:.1f}" height="{wall_h:.1f}" fill="#f7f7f7" stroke="#222" stroke-width="2"/>',
         ]
         for opening in self.opening_ids.sorted(key=lambda o: (o.x_position, o.sill_height, o.id)):
